@@ -17,6 +17,21 @@ python anc/verify_pairing.py
 
 Section B of the output evaluates all eight fixed wirings from the four-spin operators. The expected star and triangle values are approximately **0.78102344** and **0.75000000**, respectively. Keep Python assertions enabled when running the checks.
 
+## Check the formal proof of Theorem 1
+
+The [Lean companion](lean/README.md) proves the exact maximum classical score for all eight ideal fixed wirings and constructs strategies that attain it. It covers every finite-outcome measure-and-prepare strategy with a single input copy and permits arbitrary four-spin output states. The [main theorem](lean/FourSpin/Dichotomy.lean) states both attainability and the upper bound. Experimental calibration and the other results in the manuscript have separate checks.
+
+With the Lean toolchain manager installed, run the following from the repository root.
+
+```sh
+cd lean
+lake exe cache get
+lake --wfail build
+lake env lean FourSpin.lean
+```
+
+The project pins Lean 4.24.0 and the Mathlib revision used for verification.
+
 ## Reproduce the remaining calculations
 
 ```sh
